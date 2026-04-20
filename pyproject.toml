@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["scripts"]
+
+[project]
+name = "evogt"
+dynamic = ["version"]
+authors = [
+  { name = "J Hughes", email = "jhughes@stfx.ca" }
+]
+description = "Evolutionary Game Theory"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0" }
+urls = { "Homepage" = "https://github.com/jameshughes89/evogt" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "black[jupyter]==25.1.0",
+  "flake8==7.3.0",
+  "flake8-black==0.3.6",
+  "flake8-isort==6.1.2",
+  "flake8-pyproject==1.2.3",
+  "hypothesis==6.148.3",
+  "isort==6.0.1",
+  "mdformat==0.7.22",
+  "mdformat-gfm==0.4.1",
+  "mdformat-black==0.1.1",
+  "pytest==9.0.1",
+  "pytest-mock==3.15.1",
+]
+
+[project.scripts]
+format = "scripts.format:main"
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 10
+# ignore unused imports in __init__.py files
+per-file-ignores = ["__init__.py:F401"]

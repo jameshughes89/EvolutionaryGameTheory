@@ -1,0 +1,31 @@
+0. Learn about evolutionary game theory
+2. implement it to get the ideas down
+3. how does topology and geography work
+4. introduce a "bad" strategy 
+---- How many has impact? 
+---- Does topology matter?
+---- How much "time" matters?
+---- Can we exclude strategies over time? Is this the evolution?
+5. Introduce a suite of "bad" strategies. 
+---- Following (4), is it better/worse to have X from a suite or from a single group
+6. Eye for an Eye >> Turn the Other Cheek?
+---- Can this be broken? (topology)
+
+
+
+NOTES FROM VIDEO:
+- Each strategy faces each other and a copy of itself (200 rounds) and win as many points as possible (repeat all this 5x)
+- How many rounds should NOT be known (so, average around 200, but random) 
+
+
+
+Effective Choice in the Prisoner's Dilemma (March 1980) --- https://www.jstor.org/stable/pdf/173932.pdf?casa_token=gEme8WqkqnsAAAAA:ZsNiwa-8ul4WHoK_vTnWU20p73kKVHvOWU7L8bLy5Vjh6LG468YLHd8U9BRLyGkYMh2FW4WECRlyCd7-93tQXuF1JrqeyLeNqga7GB8cyh6NAuFwLnEN
+More Effective Choice in the Prisoner's Dilemma (Sept 1980) --- https://www.jstor.org/stable/pdf/173638.pdf?casa_token=qpsmQXGf0FwAAAAA:tBwLKpCRrsx3KyppncIXqPdK7W9UXgmnbOUHDkbL0CHC1dBC-fFo7ohYhRYYvgEBhBUrg3KcbHxUVK6beWVrhJZRL8qnMzYwlzhW0K81xXWpZdxmGp7l
+The Evolution of Cooperation (March 1981) --- https://www.science.org/doi/10.1126/science.7466396
+How to Cope with Noise in the Iterated Prisoner's Dilemma (March 1995) --- https://www.jstor.org/stable/pdf/174327.pdf?casa_token=URMBuelnLUsAAAAA:Rv-zHNgtv9yUMdogfc-wfqlrAfhn3CI8t4LsRzVIhQ38TIh_pN8Rqr6Tlppvchkk-E-9irOgkgXMOi00_2k8UakqvFhRSrEvdrB8Sflgd8K_fJppxyyu
+
+
+
+
+
+
