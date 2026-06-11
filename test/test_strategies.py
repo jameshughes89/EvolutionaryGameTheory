@@ -2,10 +2,10 @@ import random
 
 import pytest
 
-from src.strategies import (
+from evogt.strategies import (
     always_cooperate,
     always_defect,
-    grimm_trigger,
+    grim_trigger,
     random_move,
     tit_for_tat,
     tit_for_two_tats,
@@ -44,8 +44,8 @@ def test_always_defect_with_history_returns_false(history_self, history_opponent
     assert always_defect(history_self, history_opponent) is False
 
 
-def test_grimm_trigger_no_history_returns_true():
-    assert grimm_trigger([], []) is True
+def test_grim_trigger_no_history_returns_true():
+    assert grim_trigger([], []) is True
 
 
 @pytest.mark.parametrize(
@@ -56,8 +56,8 @@ def test_grimm_trigger_no_history_returns_true():
         ([True, False, True], [True, True, True]),
     ],
 )
-def test_grimm_trigger_with_history_opponent_has_not_defected_returns_true(history_self, history_opponent):
-    assert grimm_trigger(history_self, history_opponent) is True
+def test_grim_trigger_with_history_opponent_has_not_defected_returns_true(history_self, history_opponent):
+    assert grim_trigger(history_self, history_opponent) is True
 
 
 @pytest.mark.parametrize(
@@ -68,8 +68,8 @@ def test_grimm_trigger_with_history_opponent_has_not_defected_returns_true(histo
         ([True, False, True], [False, True, True]),
     ],
 )
-def test_grimm_trigger_with_history_opponent_has_defected_returns_false(history_self, history_opponent):
-    assert grimm_trigger(history_self, history_opponent) is False
+def test_grim_trigger_with_history_opponent_has_defected_returns_false(history_self, history_opponent):
+    assert grim_trigger(history_self, history_opponent) is False
 
 
 @pytest.mark.parametrize("return_value", [True, False])
@@ -86,6 +86,20 @@ def test_random_move_arbitrary_history_returns_random_choice(history_self, histo
     mocker.patch("random.choice", return_value=return_value)
     assert random_move(history_self, history_opponent) is return_value
     random.choice.assert_called_once_with([True, False])
+
+
+def test_random_move_same_rng_seed_returns_same_moves():
+    rng_first = random.Random(101)
+    rng_second = random.Random(101)
+    moves_first = [random_move([], [], rng=rng_first) for _ in range(10)]
+    moves_second = [random_move([], [], rng=rng_second) for _ in range(10)]
+    assert moves_first == moves_second
+
+
+def test_random_move_with_rng_does_not_use_global_random(mocker):
+    mocker.patch("random.choice")
+    random_move([], [], rng=random.Random(101))
+    random.choice.assert_not_called()
 
 
 def test_tit_for_tat_no_history_returns_true():

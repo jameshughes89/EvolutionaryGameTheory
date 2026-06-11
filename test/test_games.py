@@ -1,6 +1,6 @@
 import pytest
 
-from src.games import (
+from evogt.games import (
     battle_of_the_sexes,
     chicken,
     deadlock,

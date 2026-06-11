@@ -18,7 +18,7 @@ def battle_of_the_sexes(
     unpreferred_together_payoff > preferred_alone_payoff should be followed to ensure that both players prefer mutual
     cooperation (attending the event together) over mutual defection while still preferring their respective activities.
 
-    A varition of the game referred to as "Battle of the Sexes (2)" sets a reward of 1 for a player attending their
+    A variation of the game referred to as "Battle of the Sexes (2)" sets a reward of 1 for a player attending their
     preferred activity alone, which can be achieved by setting the preferred_alone_payoff to 1. This variation maintains
     the same strategic dynamics as the original game while also rewarding the player for attending their respective
     preferred activity.
@@ -65,13 +65,10 @@ def chicken(
     formulated to match the Hawk-Dove game or Snowdrift game.
 
     This game models a situation where two players are driving towards each other on a collision course. Each player
-    has two options: to swerve (avoid the collision) or to stay straight (not swerve). If both players swerve, they
-    both receive no punhsiment (tie). If one player swerves while the other stays straight, the player who stays
-    straight receives a high payoff (win), while the player who swerves is punished (lose). If neither player
-    swerves, they both receive a very large punishment (crash) due to the collision.
+    has two options: to swerve (avoid the collision) or to stay straight (not swerve).
 
     The default values are set to follow a typical payoff structure of the game, but they can be adjusted as needed.
-    The default crash payoff is set to an arbitrarily large negative value to create a catestrophic risk asspciated
+    The default crash payoff is set to an arbitrarily large negative value to create a catastrophic risk associated
     with crashing. The condition win_payoff > tie_payoff > lose_payoff > crash_payoff should be followed to ensure
     that both players prefer winning over tying, tying over losing, and losing over crashing.
 
@@ -121,11 +118,9 @@ def deadlock(
     Return the players' payoff based on the player's and opponent's moves in the Deadlock game.
 
     This game models a situation where two players can either cooperate or defect. The players make their decisions
-    simultaneously without knowing the other's choice. The payoffs are structured such that mutual defection yields a
-    moderate reward for both players, mutual cooperation results in a lower reward for both, defecting while the other
-    cooperates yields the highest reward for the defector and the lowest payoff for the cooperator, and cooperating
-    while the other defects results in the lowest payoff for the cooperator and the highest reward for the defector.
-    Thus, it is always in the best interest of both players to defect, regardless of the opponent's move.
+    simultaneously without knowing the other's choice. Unlike the Prisoner's Dilemma, both players prefer mutual
+    defection over mutual cooperation, so it is always in the best interest of both players to defect, regardless of
+    the opponent's move.
 
     The naming of the payoff parameters is structured such that the first part indicates who obtains the payoff,
     the second part indicates the player's move, and the third part indicates the opponent's move. For example,
@@ -184,11 +179,8 @@ def hawk_dove(
     strategy and "Dove" represents a peaceful strategy.
 
     This game models a situation where two players can either adopt an aggressive strategy (Hawk) or a peaceful strategy
-    (Dove) when competing for a shared resource. If both players choose the Hawk strategy, they engage in a conflict
-    where they are assumed to win half the time, while incurring a cost for the conflict, thus their payoff is
-    (resource_payoff - cost)/ 2. If both players choose the Dove strategy, they share the resource peacefully, each
-    receiving half the resource_payoff. If one player chooses Hawk while the other chooses Dove, the Hawk player wins
-    the entire resource, receiving the full resource_payoff, while the Dove player receives nothing.
+    (Dove) when competing for a shared resource. Two Hawks engage in a conflict where each is assumed to win half the
+    time while incurring the cost of the conflict, thus their payoff is (resource_payoff - cost)/2.
 
     The default values are from Maynard Smith and are set to follow a typical payoff structure of the game, but they
     can be adjusted as needed. The condition resource_payoff > (resource_payoff - cost)/2 > resource_payoff/2 > 0
@@ -231,10 +223,8 @@ def matching_pennies(move_player_heads: bool, move_opponent_heads: bool) -> tupl
     """
     Return the players' payoff based on the player's and opponent's moves in the Matching Pennies game.
 
-    The game is a zero-sum game where one player's gain is the other player's loss. If both players choose the same
-    side (both heads or both tails), the player wins and receives a payoff of 1, while the opponent loses and receives
-    a payoff of -1. If the players choose different sides (one heads and one tails), the opponent wins and receives
-    a payoff of 1, while the player loses and receives a payoff of -1.
+    The game is a zero-sum game where one player's gain is the other player's loss. The player wins when both players
+    choose the same side, and the opponent wins when they choose different sides.
 
     Below is the payoff matrix:
 
@@ -269,21 +259,17 @@ def prisoners_dilemma(
     punishment_payoff: float = -2,
     temptation_payoff: float = 0,
     sucker_payoff: float = -3,
-) -> tuple[int, int]:
+) -> tuple[float, float]:
     """
     Return the player's payoff based on the player's and opponent's moves in the Prisoner's Dilemma game.
 
     This game models a situation where two players can either cooperate with each other or defect (betray) each other.
-    The players make their decisions simultaneously without knowing the other's choice. The payoffs are structured
-    such that mutual cooperation yields a moderate reward for both players, mutual defection results in a
-    moderate punishment for both, defecting while the other cooperates yields the highest reward for the defector
-    and the lowest payoff for the cooperator, and cooperating while the other defects results in the lowest payoff for
-    the cooperator and the highest reward for the defector.
+    The players make their decisions simultaneously without knowing the other's choice.
 
     The default values are set for the classic version of the game, but in general the condition temptation
     > reward > punishment > sucker should be followed to ensure the game behaves as expected. The payoff
     relationship reward_payoff > punishment_payoff ensures that mutual cooperation is more beneficial than mutual
-    defection, while temptation_pauoff > reward_payoff and punishment_payoff > sucker_payoff ensure that defecting
+    defection, while temptation_payoff > reward_payoff and punishment_payoff > sucker_payoff ensure that defecting
     against a cooperating opponent is the dominant strategy.
 
     When an iterative version of the game is played, the condition 2*reward_payoff > temptation_payoff + sucker_payoff
@@ -332,10 +318,7 @@ def stag_hunt(
     Return the players' payoff based on the player's and opponent's moves in the Stag Hunt game.
 
     This game models a situation where two players can either cooperate to hunt a stag or individually hunt a hare.
-    Hunting a stag requires mutual cooperation, while hunting a hare can be done alone. If both players choose to hunt
-    the stag, they both receive a high payoff. If both players choose to hunt the hare, they both receive a moderate
-    payoff. If one player hunts the stag while the other hunts the hare, the player hunting the stag receives no payoff,
-    while the player hunting the hare receives a moderate payoff.
+    Hunting a stag requires mutual cooperation, while hunting a hare can be done alone.
 
     The default values are set to follow a typical payoff structure of the game, but they can be adjusted as needed.
     The condition stag_together_payoff > hare_alone_payoff >= hare_together_payoff > stag_alone_payoff should be
@@ -379,20 +362,18 @@ def ultimatum(
     unfair_player_payoff: float = 8,
     unfair_opponent_payoff: float = 2,
     reject_payoff: float = 0,
-) -> tuple[int, int]:
+) -> tuple[float, float]:
     """
     Return the player's payoff based on the player's and opponent's moves in the Ultimatum game.
 
-    This game models a situation where one player (the proposer) offers a fair or unfare split of a sum of money to
+    This game models a situation where one player (the proposer) offers a fair or unfair split of a sum of money to
     another player (the responder). The responder can either accept or reject the offer. If the offer is accepted,
     both players receive the proposed split. If the offer is rejected, both players receive nothing.
 
     The default values are set to follow a typical payoff structure of the game, but they can be adjusted as needed.
     The condition unfair_player_payoff > fair_payoff > reject_payoff and fair_payoff > unfair_opponent_payoff
     > reject_payoff should be followed to ensure that both players prefer fair offers over rejections while still
-    preferring unfair offers from the player over fair offers. Note that the unfair_opponent_payoff is not a parameter
-    of the function as it does not affect the player's payoff, but it is included in the description for clarity and
-    completeness.
+    preferring unfair offers from the player over fair offers.
 
     A more general case of this game exists allowing the player to choose the amount to offer the opponent, but is not
     implemented here.
@@ -407,9 +388,7 @@ def ultimatum(
             U  | unfair_player_payoff, unfair_opponent_payoff | reject_payoff, reject_payoff |
                +----------------------------------------------+------------------------------+
 
-    Where F is fair (True), U is unfair (False), A is accept (True), and R is reject (False). Note that, although
-    the payoffs are represented as tuples (player, opponent) in the matrix for clarity, the function only returns
-    the player's payoff.
+    Where F is fair (True), U is unfair (False), A is accept (True), and R is reject (False).
 
     :param move_player_fair: Player's move, True for fair offer, False for unfair offer
     :param move_opponent_accept: Opponent's move, True for accept, False for reject
@@ -434,12 +413,10 @@ def volunteer_dilemma(
     no_volunteer_payoff: float = -10,
 ) -> tuple[float, ...]:
     """
-    Return the players' payoffs based on on the groups' moves in the Volunteer Dilemma game. This is an n-player game.
+    Return the players' payoffs based on the groups' moves in the Volunteer Dilemma game. This is an n-player game.
 
     This game models a situation where multiple players can choose to volunteer to perform a task that benefits the
-    group. If at least one player volunteers, all players receive a positive payoff (public_payoff), while the
-    volunteering players receive a lower payoff (volunteer_payoff) due to the cost of volunteering. If no players
-    volunteer, all players receive a negative payoff (no_volunteer_payoff) due to the lack of the task being performed.
+    group, where volunteering incurs a personal cost.
 
     If only two players are involved, the game is equivalent to the Chicken game, where volunteering is analogous to
     swerving and not volunteering is analogous to staying straight.
@@ -484,10 +461,7 @@ def volunteer_dilemma_quantum(
     game. This variation introduces a quantum aspect to the traditional volunteer dilemma.
 
     This game models a situation where multiple players can choose to volunteer to perform a task that benefits the
-    group. Unlike the base Volunteer Dilemma, if at least one player volunteers, all players receive the public_payoff,
-    but the volunteering players receive the public_payoff minus the cost of volunteering (volunteer_payoff) divided by
-    the number of volunteers, due to the shared cost among volunteers. If no players volunteer, all players receive a
-    neutral payoff (no_volunteer_payoff) due to the lack of the task being performed.
+    group. Unlike the base Volunteer Dilemma, the cost of volunteering is shared among the volunteers.
 
     The default values are from Koh, Kumar, and Goh 2025, and are set to follow a typical payoff structure of the game,
     but they can be adjusted as needed. The condition that public_payoff > (public_payoff - volunteer_payoff) >

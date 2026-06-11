@@ -27,7 +27,7 @@ def always_defect(history_self: list[bool], history_opponent: list[bool]) -> boo
     return False
 
 
-def grimm_trigger(history_self: list[bool], history_opponent: list[bool]) -> bool:
+def grim_trigger(history_self: list[bool], history_opponent: list[bool]) -> bool:
     """
     Cooperate until the opponent defects once, then always defect
 
@@ -43,7 +43,7 @@ def grimm_trigger(history_self: list[bool], history_opponent: list[bool]) -> boo
         return True
 
 
-def random_move(history_self: list[bool], history_opponent: list[bool]) -> bool:
+def random_move(history_self: list[bool], history_opponent: list[bool], rng: random.Random | None = None) -> bool:
     """
     Randomly cooperate or defect with equal probability.
 
@@ -51,9 +51,11 @@ def random_move(history_self: list[bool], history_opponent: list[bool]) -> bool:
 
     :param history_self: List of all the player's past moves in the series
     :param history_opponent: List of all the opponent's past moves in the series
+    :param rng: Optional random number generator for reproducibility; defaults to the global random module
     :return: True for cooperate, False for defect
     """
-    return random.choice([True, False])
+    generator = rng if rng is not None else random
+    return generator.choice([True, False])
 
 
 def tit_for_tat(history_self: list[bool], history_opponent: list[bool]) -> bool:
