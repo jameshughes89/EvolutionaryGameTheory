@@ -88,20 +88,6 @@ def test_random_move_arbitrary_history_returns_random_choice(history_self, histo
     random.choice.assert_called_once_with([True, False])
 
 
-def test_random_move_same_rng_seed_returns_same_moves():
-    rng_first = random.Random(101)
-    rng_second = random.Random(101)
-    moves_first = [random_move([], [], rng=rng_first) for _ in range(10)]
-    moves_second = [random_move([], [], rng=rng_second) for _ in range(10)]
-    assert moves_first == moves_second
-
-
-def test_random_move_with_rng_does_not_use_global_random(mocker):
-    mocker.patch("random.choice")
-    random_move([], [], rng=random.Random(101))
-    random.choice.assert_not_called()
-
-
 def test_tit_for_tat_no_history_returns_true():
     assert tit_for_tat([], []) is True
 

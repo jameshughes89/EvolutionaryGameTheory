@@ -10,7 +10,7 @@ enabled = true
 
 [tool.black]
 line-length = 120
-target-version = ["py311"]
+target-version = ["py312"]
 
 [tool.codespell]
 
@@ -32,7 +32,7 @@ authors = [
 ]
 description = "Evolutionary Game Theory"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "GPL-3.0" }
 urls = { "Homepage" = "https://github.com/jameshughes89/evogt" }
 classifiers = [
