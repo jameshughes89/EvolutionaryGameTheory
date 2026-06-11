@@ -88,6 +88,23 @@ def test_random_move_arbitrary_history_returns_random_choice(history_self, histo
     random.choice.assert_called_once_with([True, False])
 
 
+@pytest.mark.parametrize("return_value", [True, False])
+@pytest.mark.parametrize(
+    "history_self, history_opponent",
+    [
+        ([], []),
+        ([True], [False]),
+        ([False, True], [True, False]),
+        ([True, False, True], [False, True, False]),
+    ],
+)
+def test_random_move_with_rng_returns_rng_choice(history_self, history_opponent, return_value, mocker):
+    rng = mocker.Mock()
+    rng.choice.return_value = return_value
+    assert random_move(history_self, history_opponent, rng=rng) is return_value
+    rng.choice.assert_called_once_with([True, False])
+
+
 def test_tit_for_tat_no_history_returns_true():
     assert tit_for_tat([], []) is True
 
